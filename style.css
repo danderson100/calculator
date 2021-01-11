@@ -38,7 +38,7 @@ section {
     width: auto;
     display: grid;
     grid-template-columns: 2fr 4fr 2fr;
-    grid-template-rows: 1fr 7fr 4fr;
+    grid-template-rows: 1fr 6fr 4fr;
     grid-gap: 1em;
 }
 
@@ -94,8 +94,8 @@ div {
 }
 
 .calc-container {
-    max-width: 550px;
-    max-height: 800px;
+    max-width: 450px;
+    max-height: 650px;
     display: grid;
     grid-template-rows: 2fr repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
