@@ -5,6 +5,14 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Goldman', cursive;
+    background-image: linear-gradient(to right, #606c88, #3f4c6b);
+    
+}
+
+h1 {
+    font-style: bold;
+    font-size: 75px;
+    color: whitesmoke;
 }
 
 button {
@@ -19,7 +27,7 @@ button {
     text-align: center;
     display: inline-block;
     border-radius: 20%;
-    font-size: 24px;
+    font-size: 28px;
 }
 
 section {
@@ -34,7 +42,7 @@ section {
 div {
     width: 100%;
     height: 100%;
-    background-color: purple;
+    /* background-color: purple; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,8 +56,8 @@ div {
 }
 
 #display-element {
-    padding-right: 1em;
-    font-size: 30px;
+    padding-right: 22px;
+    font-size: 60px;
 }
 
 .buttons {
@@ -85,24 +93,31 @@ div {
         "main main main ad"
         "main main main ad";
 
-    width: 90%;
-    height: 90%;
+    width: 80%;
+    height: 95%;
     border-style: solid;
     border-width: 10px;
     border-color: black;
     border-radius: 3%;
-    background-color: whitesmoke;
     padding-bottom: 10px;
   }
 
   .buttons-wrapper {
       display: grid;
       padding-left: 10px;
+      padding-top: 15px;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(5, 1fr);
       width: 100%;
       height: 100%;
+  }
 
+  .calc-background {
+    background-color: rgb(129, 122, 122);
+  }
+
+  .padding-top {
+      padding-top: 15px;
   }
 
 .centered {
