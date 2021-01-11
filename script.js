@@ -2,7 +2,6 @@
  * Author: David Anderson
  * Date: Jan 11, 2021
  * 
- * TODO: add negative value function. Allow for multiple operations
  */
 
 
@@ -25,7 +24,6 @@ buttons.forEach(button => button.addEventListener('click', doButtonStuff));
 function doButtonStuff(e) {
 
     if (equalsUsed) {
-        console.log("equals used, clearing...")
         clearAll();
     }
 
@@ -46,6 +44,9 @@ function doButtonStuff(e) {
             case 'operation':
                 setOperation(btnId, display);
                 break;
+            case 'neg':
+                setNegative(display);
+                break;
             case 'clear':
                 doClearStuff(btnId, display);
                 break;
@@ -53,18 +54,40 @@ function doButtonStuff(e) {
 
 }
 
+function setNegative(display) {
+    if (currOperand == 1 && firstOperand != '') {
+        firstOperand = '-' + firstOperand;
+        display.textContent = firstOperand;
+    } else if (currOperand == 2 && secondOperand != '') {
+        secondOperand = '-' + secondOperand;
+        display.textContent = secondOperand;
+    }
+
+}
+
 function setOperation(btnId, display) {
+
     if (btnId == 'eq' && firstOperand != '' 
     && operation != null && secondOperand != '') {
 
         let result = operate();
-        let roundedRes = parseFloat(result.toFixed(3));
+        let roundedRes = parseFloat(result.toFixed(5));
         display.textContent = roundedRes;
 
         equalsUsed = true;
 
+    } else if (firstOperand != '' 
+    && operation != null && secondOperand != '') {
+
+        let result = operate();
+        let roundedRes = parseFloat(result.toFixed(5));
+        display.textContent = roundedRes;
+
+        firstOperand = roundedRes;
+        secondOperand = '';
+        operation = btnId;
+
     } else {
-        console.log("pressed " + btnId);
         operation = btnId;
     }
 }
@@ -72,20 +95,19 @@ function setOperation(btnId, display) {
 function operate() {
     switch (operation) {
         case 'divide':
-            return firstOperand / secondOperand;
+            return parseFloat(firstOperand / secondOperand);
         case 'mp':
-            return firstOperand * secondOperand;
+            return parseFloat(firstOperand * secondOperand);
         case 'sub':
-            return firstOperand - secondOperand;
+            return parseFloat(firstOperand - secondOperand);
         case 'add':
-            return firstOperand + secondOperand;
+            return parseFloat(firstOperand) + parseFloat(secondOperand);
     }
 }
 
 function appendDecimal(btnId, display) {
     if (currOperand === 1) {
         if (btnId == '.' && decimalUsed) {
-            console.log("Returning...");
             //just ignore it because we can't have multiple decimals
             return;
         } else {
@@ -95,7 +117,6 @@ function appendDecimal(btnId, display) {
         }
     } else {
         if (btnId == '.' && decimalUsed) {
-            console.log("Returning...");
             //just ignore it because we can't have multiple decimals
             return;
         } else {
@@ -111,7 +132,7 @@ function doNumberStuff(btnId, display) {
     if (firstOperand == '' && operation == null) {
         firstOperand = btnId;
         display.textContent = firstOperand;
-        console.log(firstOperand);
+
     } else if (firstOperand != '' && operation == null) {
         firstOperand += btnId;
         display.textContent = firstOperand;
@@ -144,7 +165,7 @@ function doClearStuff(btnId, display) {
             //then we need to remove a digit from first operand
             firstOperand = firstOperand.substring(0, firstOperand.length-1);
             thingToDisplay = firstOperand;
-            console.log(thingToDisplay);
+
         } else {
             secondOperand = secondOperand.substring(0, secondOperand.length-1);
             thingToDisplay = secondOperand;
@@ -160,7 +181,6 @@ function doClearStuff(btnId, display) {
 }
 
 function clearAll() {
-    console.log("clearing all...");
     //reset all
     firstOperand = '';
     operation = null;
