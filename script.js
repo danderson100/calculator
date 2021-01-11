@@ -18,6 +18,8 @@ let decimalUsed = false;
 
 let equalsUsed = false;
 
+let negative = false;
+
 
 buttons.forEach(button => button.addEventListener('click', doButtonStuff));
 
@@ -55,13 +57,27 @@ function doButtonStuff(e) {
 }
 
 function setNegative(display) {
-    if (currOperand == 1 && firstOperand != '') {
-        firstOperand = '-' + firstOperand;
-        display.textContent = firstOperand;
-    } else if (currOperand == 2 && secondOperand != '') {
-        secondOperand = '-' + secondOperand;
-        display.textContent = secondOperand;
+    if (!negative) {
+        if (currOperand == 1 && firstOperand != '') {
+            firstOperand = '-' + firstOperand;
+            display.textContent = firstOperand;
+        } else if (currOperand == 2 && secondOperand != '') {
+            secondOperand = '-' + secondOperand;
+            display.textContent = secondOperand;
+        }
+        negative = true;
+    } else {
+        //turn to positive
+        if (currOperand == 1 && firstOperand != '') {
+            firstOperand = Math.abs(firstOperand);
+            display.textContent = firstOperand;
+        } else if (currOperand == 2 && secondOperand != '') {
+            secondOperand = Math.abs(secondOperand);
+            display.textContent = secondOperand;
+        }
+        negative = false;
     }
+
 
 }
 
